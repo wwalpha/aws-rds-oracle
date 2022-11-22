@@ -20,17 +20,10 @@ module "security" {
   suffix = local.suffix
 }
 
-module "storage" {
-  source = "./storage"
-  suffix = local.suffix
-}
-
 module "app" {
   depends_on                = [module.networking]
   source                    = "./app"
   suffix                    = local.suffix
-  lambda_module_bucket_name = module.storage.bucket_name
-  lambda_module_bucket_key  = module.storage.lambda_module_key
   vpc_id                    = module.networking.vpc_id
   public_subnets            = module.networking.public_subnet_ids
   private_subnets           = module.networking.private_subnet_ids

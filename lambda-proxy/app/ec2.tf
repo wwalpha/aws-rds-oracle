@@ -8,7 +8,7 @@
 # EOT
 # }
 
-module "ec2_instance1" {
+module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 3.0"
 
@@ -20,5 +20,5 @@ module "ec2_instance1" {
   vpc_security_group_ids = [module.app_sg.security_group_id]
   subnet_id              = var.private_subnets[0]
   # user_data_base64       = base64encode(local.user_data)
-  iam_instance_profile = var.ec2_ssm_role_profile
+  iam_instance_profile = var.iam_role_profile_ec2_ssm
 }

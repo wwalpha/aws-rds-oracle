@@ -14,6 +14,6 @@ variable "iam_role_profile_ec2_ssm" {}
 
 variable "iam_role_arn_lambda_proxy" {}
 
-variable "lambda_module_bucket_name" {}
+# variable "lambda_module_bucket_name" {}
 
-variable "lambda_module_bucket_key" {}
+# variable "lambda_module_bucket_key" {}
