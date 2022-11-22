@@ -1,11 +1,34 @@
-# resource "aws_db_security_group" "this" {
-#   name = "rds_sg_${var.suffix}"
+# ----------------------------------------------------------------------------------------------
+# AWS Security Group - RDS
+# ----------------------------------------------------------------------------------------------
+resource "aws_security_group" "rds" {
+  name   = "rds_sg"
+  vpc_id = var.vpc_id
+}
 
-#   ingress {
-#     cidr = var.private_subnet_ids[0]
-#   }
+resource "aws_security_group_rule" "rds" {
+  security_group_id        = aws_security_group.rds.id
+  type                     = "ingress"
+  protocol                 = "tcp"
+  from_port                = 5432
+  to_port                  = 5432
+  source_security_group_id = aws_security_group.rds_proxy.id
+}
 
-#   ingress {
-#     cidr = var.private_subnet_ids[1]
-#   }
-# }
+# ----------------------------------------------------------------------------------------------
+# AWS Security Group - RDS Proxy
+# ----------------------------------------------------------------------------------------------
+resource "aws_security_group" "rds_proxy" {
+  name   = "rds_proxy_sg"
+  vpc_id = var.vpc_id
+}
+
+resource "aws_security_group_rule" "rds_proxy" {
+  security_group_id = aws_security_group.rds_proxy.id
+  type              = "ingress"
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  from_port         = 5432
+  to_port           = 5432
+}
+

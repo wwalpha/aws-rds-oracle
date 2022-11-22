@@ -19,7 +19,7 @@ resource "aws_iam_instance_profile" "ec2_ssm" {
 # AWS Role - Lambda
 # ----------------------------------------------------------------------------------------------
 resource "aws_iam_role" "lambda_proxy" {
-  name               = "Lambda_ProxyRole_${var.suffix}"
+  name               = "LambdaProxyRole_${var.suffix}"
   assume_role_policy = data.aws_iam_policy_document.lambda.json
 
   lifecycle {

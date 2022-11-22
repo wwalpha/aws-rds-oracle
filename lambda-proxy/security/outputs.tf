@@ -1,16 +1,15 @@
-output "ec2_ssm_role" {
-  value = aws_iam_role.ec2_ssm
+output "iam_role_arn_ec2_ssm" {
+  value = aws_iam_role.ec2_ssm.arn
 }
 
-output "lambda_proxy_role" {
-  value = aws_iam_role.ec2_ssm
+output "iam_role_arn_rds_proxy" {
+  value = aws_iam_role.rds_proxy.arn
 }
 
+output "iam_role_arn_lambda" {
+  value = aws_iam_role.lambda_proxy.arn
+}
 
-output "ec2_ssm_role_profile" {
+output "iam_role_profile_ec2_ssm" {
   value = aws_iam_instance_profile.ec2_ssm
-}
-
-output "rds_secretsmanager" {
-  value = aws_secretsmanager_secret.this
 }

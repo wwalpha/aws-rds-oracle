@@ -25,3 +25,17 @@ data "aws_iam_policy_document" "lambda" {
     }
   }
 }
+
+# ----------------------------------------------------------------------------------------------
+# AWS IAM Policy Document - RDS
+# ----------------------------------------------------------------------------------------------
+data "aws_iam_policy_document" "rds" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["rds.amazonaws.com"]
+    }
+  }
+}
