@@ -32,7 +32,7 @@ resource "aws_iam_role" "lambda_proxy" {
 # ----------------------------------------------------------------------------------------------
 resource "aws_iam_role" "rds_proxy" {
   name               = "RDS_ProxyRole_${var.suffix}"
-  assume_role_policy = data.aws_iam_policy_document.lambda.json
+  assume_role_policy = data.aws_iam_policy_document.rds.json
 
   lifecycle {
     create_before_destroy = false

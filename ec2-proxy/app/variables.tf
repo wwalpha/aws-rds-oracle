@@ -8,12 +8,13 @@ variable "private_subnets" {}
 
 variable "private_subnet_cidr_block" {}
 
-variable "database_subnets" {}
-
 variable "iam_role_profile_ec2_ssm" {}
 
-variable "iam_role_arn_lambda_proxy" {}
+variable "database_proxy_sg_id" {}
 
-# variable "lambda_module_bucket_name" {}
+variable "database_proxy_endpoint" {}
 
-# variable "lambda_module_bucket_key" {}
+variable "database_username" {}
+
+variable "database_password" {}
+

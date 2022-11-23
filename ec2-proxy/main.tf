@@ -20,19 +20,6 @@ module "security" {
   suffix = local.suffix
 }
 
-module "app" {
-  depends_on                = [module.networking]
-  source                    = "./app"
-  suffix                    = local.suffix
-  vpc_id                    = module.networking.vpc_id
-  public_subnets            = module.networking.public_subnet_ids
-  private_subnets           = module.networking.private_subnet_ids
-  private_subnet_cidr_block = module.networking.private_subnets_cidr_blocks
-  database_subnets          = module.networking.database_subnet_ids
-  iam_role_arn_lambda_proxy = module.security.iam_role_arn_lambda
-  iam_role_profile_ec2_ssm  = module.security.iam_role_profile_ec2_ssm
-}
-
 module "database" {
   depends_on                = [module.networking]
   source                    = "./database"
@@ -44,4 +31,22 @@ module "database" {
   database_username         = var.database_username
   database_password         = var.database_password
   iam_role_arn_rds_proxy    = module.security.iam_role_arn_rds_proxy
+}
+
+module "app" {
+  depends_on = [
+    module.networking,
+    module.database
+  ]
+  source                    = "./app"
+  suffix                    = local.suffix
+  vpc_id                    = module.networking.vpc_id
+  public_subnets            = module.networking.public_subnet_ids
+  private_subnets           = module.networking.private_subnet_ids
+  private_subnet_cidr_block = module.networking.private_subnets_cidr_blocks
+  iam_role_profile_ec2_ssm  = module.security.iam_role_profile_ec2_ssm
+  database_proxy_sg_id      = module.database.aws_rds_proxy_sg.id
+  database_proxy_endpoint   = module.database.aws_rds_proxy.endpoint
+  database_username         = var.database_username
+  database_password         = var.database_password
 }
