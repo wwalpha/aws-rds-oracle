@@ -1,4 +1,5 @@
 # aws-rds-oracle
 
-## Examples
-- RDS lambda proxy
+## EC2 + RDS Proxy + PostgreSQL
+
+![image](./docs/ec2-proxy.png)
