@@ -16,7 +16,19 @@ resource "aws_iam_instance_profile" "ec2_ssm" {
 }
 
 # ----------------------------------------------------------------------------------------------
-# AWS Role - RDS Proxy
+# AWS Role - Lambda
+# ----------------------------------------------------------------------------------------------
+resource "aws_iam_role" "lambda_app" {
+  name               = "${var.prefix}LambdaAppRole"
+  assume_role_policy = data.aws_iam_policy_document.lambda.json
+
+  lifecycle {
+    create_before_destroy = false
+  }
+}
+
+# ----------------------------------------------------------------------------------------------
+# AWS Role
 # ----------------------------------------------------------------------------------------------
 resource "aws_iam_role" "rds_proxy" {
   name               = "${var.prefix}_RDS_ProxyRole"
