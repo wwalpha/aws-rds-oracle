@@ -9,13 +9,6 @@ curl -O https://www.postgresqltutorial.com/wp-content/uploads/2019/05/dvdrental.
 unzip dvdrental.zip
 
 # create sample database
-echo "export PGUSER=${var.database_username}" >> /root/.bash_profile
-echo "export PGPASSWORD=${var.database_password}" >> /root/.bash_profile
-echo "export PGHOST=${var.database_proxy_endpoint}" >> /root/.bash_profile
-echo "export PGDATABASE=dvdrental" >> /root/.bash_profile
-echo "export PGPORT=5432" >> /root/.bash_profile
-source /root/.bash_profile
-
 psql -d postgres -c "create database dvdrental;"
 pg_restore -d dvdrental dvdrental.tar
 psql -d dvdrental -c "\dt"
@@ -24,13 +17,22 @@ psql -d dvdrental -c "\dt"
 curl -sL https://rpm.nodesource.com/setup_16.x | sudo bash -
 curl -sL https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
 yum install -y git nodejs yarn
-npm install -g typescript ts-node
+npm install -g typescript ts-node forever
 
 # install sample source
 git clone https://github.com/wwalpha/nodejs-postgresql-samples.git
 cd nodejs-postgresql-samples
 yarn install
-yarn start
+
+# export environment variables
+echo "PGUSER=${var.database_username}" > .env
+echo "PGPASSWORD=${var.database_password}" >> .env
+echo "PGHOST=${var.database_proxy_endpoint}" >> .env
+echo "PGDATABASE=dvdrental" >> .env
+echo "PGPORT=5432" >> .env
+
+# start app in background
+forever start -c "yarn start" ./
 
 # sudo tail /var/log/cloud-init-output.log -n 20
 EOT

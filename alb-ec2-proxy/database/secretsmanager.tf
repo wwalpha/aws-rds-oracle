@@ -1,5 +1,9 @@
+resource "random_id" "this" {
+  byte_length = 4
+}
+
 resource "aws_secretsmanager_secret" "this" {
-  name = "demo/rdsproxy/postgresql"
+  name = "demo/rdsproxy/postgresql2${random_id.this.hex}"
 }
 
 resource "aws_secretsmanager_secret_version" "this" {
@@ -14,5 +18,3 @@ resource "aws_secretsmanager_secret_version" "this" {
     dbInstanceIdentifier = aws_db_instance.this.identifier
   })
 }
-# aws rds describe-db-proxies --db-proxy-name progresql-proxy-c7865e23
-# aws rds describe-db-proxy-target-groups --db-proxy-name progresql-proxy-c7865e23

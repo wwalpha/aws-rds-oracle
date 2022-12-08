@@ -20,12 +20,15 @@ module "alb" {
           port      = 8080
         }
       }
+      health_check = {
+        path = "/v1/health"
+      }
     }
   ]
 
   http_tcp_listeners = [
     {
-      port               = 8080
+      port               = 80
       protocol           = "HTTP"
       target_group_index = 0
     }

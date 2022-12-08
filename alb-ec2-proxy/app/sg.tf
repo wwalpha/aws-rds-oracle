@@ -33,7 +33,7 @@ module "alb_sg" {
   ingress_with_cidr_blocks = [
     {
       rule        = "http-80-tcp"
-      cidr_blocks = "10.10.0.0/16"
+      cidr_blocks = "0.0.0.0/0"
     }
   ]
   egress_with_source_security_group_id = [
