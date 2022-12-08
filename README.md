@@ -1,4 +1,4 @@
-# aws-rds-oracle
+# AWS RDS Proxy Examples
 
 ## [ALB + EC2 + RDS Proxy + PostgreSQL](./alb-ec2-proxy/README.md)
 
