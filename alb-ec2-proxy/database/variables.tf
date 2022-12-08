@@ -1,4 +1,4 @@
-variable "suffix" {}
+variable "prefix" {}
 
 variable "vpc_id" {}
 
@@ -7,8 +7,6 @@ variable "database_subnet_ids" {}
 variable "private_subnet_ids" {}
 
 variable "private_subnet_cidr_block" {}
-
-# variable "availability_zones" {}
 
 variable "database_username" {}
 

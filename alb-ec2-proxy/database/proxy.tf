@@ -1,5 +1,5 @@
 resource "aws_db_proxy" "this" {
-  name                   = "progresql-proxy-${var.suffix}"
+  name                   = "${var.prefix}-progresql-proxy"
   debug_logging          = true
   engine_family          = "POSTGRESQL"
   idle_client_timeout    = 5400

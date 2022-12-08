@@ -1,1 +1,1 @@
-variable "suffix" {}
+variable "prefix" {}

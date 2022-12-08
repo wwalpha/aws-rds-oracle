@@ -1,5 +1,5 @@
 resource "aws_secretsmanager_secret" "this" {
-  name = "demo/rdsproxy/postgresql2-${var.suffix}"
+  name = "demo/rdsproxy/postgresql"
 }
 
 resource "aws_secretsmanager_secret_version" "this" {

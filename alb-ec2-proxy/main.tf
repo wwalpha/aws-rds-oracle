@@ -10,20 +10,18 @@ terraform {
 }
 
 module "networking" {
-  depends_on = [random_id.this]
-  source     = "./networking"
-  suffix     = local.suffix
+  source = "./networking"
+  prefix = local.prefix
 }
 
 module "security" {
   source = "./security"
-  suffix = local.suffix
+  prefix = local.prefix
 }
 
 module "database" {
-  depends_on                = [module.networking]
   source                    = "./database"
-  suffix                    = local.suffix
+  prefix                    = local.prefix
   vpc_id                    = module.networking.vpc_id
   private_subnet_cidr_block = module.networking.private_subnets_cidr_blocks
   private_subnet_ids        = module.networking.private_subnet_ids
@@ -34,12 +32,8 @@ module "database" {
 }
 
 module "app" {
-  depends_on = [
-    module.networking,
-    module.database
-  ]
   source                    = "./app"
-  suffix                    = local.suffix
+  prefix                    = local.prefix
   vpc_id                    = module.networking.vpc_id
   public_subnets            = module.networking.public_subnet_ids
   private_subnets           = module.networking.private_subnet_ids

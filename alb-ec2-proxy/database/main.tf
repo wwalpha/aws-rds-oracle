@@ -1,6 +1,6 @@
 resource "aws_db_instance" "this" {
   allocated_storage            = 100
-  identifier                   = "postgres-${var.suffix}"
+  identifier                   = "${var.prefix}-postgres"
   engine                       = "postgres"
   engine_version               = "13.7"
   instance_class               = "db.t3.medium"

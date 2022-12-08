@@ -5,7 +5,7 @@ module "app_sg" {
   vpc_id = var.vpc_id
   ingress_with_source_security_group_id = [
     {
-      rule                     = "http-80-tcp"
+      rule                     = "http-8080-tcp"
       source_security_group_id = module.alb_sg.security_group_id
     }
   ]
@@ -38,7 +38,7 @@ module "alb_sg" {
   ]
   egress_with_source_security_group_id = [
     {
-      rule                     = "http-80-tcp"
+      rule                     = "http-8080-tcp"
       source_security_group_id = module.app_sg.security_group_id
     }
   ]

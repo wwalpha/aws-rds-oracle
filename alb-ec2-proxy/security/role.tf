@@ -2,7 +2,7 @@
 # AWS Role - EC2
 # ----------------------------------------------------------------------------------------------
 resource "aws_iam_role" "ec2_ssm" {
-  name               = "EC2_SSMRole_${var.suffix}"
+  name               = "${var.prefix}_EC2_SSMRole"
   assume_role_policy = data.aws_iam_policy_document.ec2.json
 
   lifecycle {
@@ -19,7 +19,7 @@ resource "aws_iam_instance_profile" "ec2_ssm" {
 # AWS Role - Lambda
 # ----------------------------------------------------------------------------------------------
 resource "aws_iam_role" "lambda_proxy" {
-  name               = "LambdaProxyRole_${var.suffix}"
+  name               = "${var.prefix}_LambdaProxyRole"
   assume_role_policy = data.aws_iam_policy_document.lambda.json
 
   lifecycle {
@@ -31,7 +31,7 @@ resource "aws_iam_role" "lambda_proxy" {
 # AWS Role - Lambda
 # ----------------------------------------------------------------------------------------------
 resource "aws_iam_role" "rds_proxy" {
-  name               = "RDS_ProxyRole_${var.suffix}"
+  name               = "${var.prefix}_RDS_ProxyRole"
   assume_role_policy = data.aws_iam_policy_document.rds.json
 
   lifecycle {
