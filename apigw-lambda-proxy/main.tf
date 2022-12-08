@@ -50,4 +50,5 @@ module "app" {
   database_password         = var.database_password
   lambda_module_bucket_name = module.storage.bucket_name
   lambda_module_bucket_key  = module.storage.lambda_module_key
+  lambda_module_version_id  = module.storage.lambda_module_version_id
 }

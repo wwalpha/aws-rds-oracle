@@ -19,13 +19,13 @@ resource "aws_apigatewayv2_stage" "this" {
 # API Gateway Integration 
 # ---------------------------------------------------------------------------------------------
 resource "aws_apigatewayv2_integration" "app" {
-  api_id               = aws_apigatewayv2_api.this.id
-  integration_type     = "AWS_PROXY"
-  connection_type      = "INTERNET"
-  description          = "Lambda example"
-  integration_method   = "POST"
-  integration_uri      = aws_lambda_function.app.invoke_arn
-  passthrough_behavior = "WHEN_NO_MATCH"
+  api_id                 = aws_apigatewayv2_api.this.id
+  integration_type       = "AWS_PROXY"
+  connection_type        = "INTERNET"
+  integration_method     = "POST"
+  integration_uri        = aws_lambda_function.app.arn
+  passthrough_behavior   = "WHEN_NO_MATCH"
+  payload_format_version = "2.0"
 }
 
 # ---------------------------------------------------------------------------------------------
@@ -33,6 +33,6 @@ resource "aws_apigatewayv2_integration" "app" {
 # ---------------------------------------------------------------------------------------------
 resource "aws_apigatewayv2_route" "app" {
   api_id    = aws_apigatewayv2_api.this.id
-  route_key = "GET /query"
+  route_key = "GET /"
   target    = "integrations/${aws_apigatewayv2_integration.app.id}"
 }

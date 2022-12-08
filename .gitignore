@@ -2,3 +2,5 @@
 tfstate*
 default.zip
 secrets.*
+node_modules
+*.lock
